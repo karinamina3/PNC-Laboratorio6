@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Ingresar Contribuyente</title>
+<style>
+	* {
+		font-family: Arial, Helvetica, sans-serif;
+	  	box-sizing: border-box;
+	}
+	
+	label {
+		color: #848484;
+		padding: 12px 12px 12px 0;
+	  	display: inline-block;
+	}
+	
+	span {
+		color: #E81505;
+	}
+	
+	input, a {
+		width: 100%;
+		padding: 12px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		resize: vertical;
+		margin-bottom: 1em;
+	}
+	
+	.button {
+		width: auto;
+		margin-top: 1em;
+		background-color: #2E64FE;
+		border: none;
+		float: right;
+		color: white;
+		cursor: pointer;
+	}
+	
+	a {
+		text-decoration: none;	
+	  	float: left !important;
+	}
+	
+	.button:hover {
+		background-color: #819FF7;
+	}
+	
+	.container {
+		border-radius: 5px;
+		background-color: #f2f2f2;
+		padding: 20px;
+	}
+	
+	.col-25 {
+		float: left;
+		width: 25%;
+		margin-top: 6px;
+	}
+	
+	.col-75 {
+		float: left;
+		width: 75%;
+		margin-top: 6px;
+	}
+	
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+</style>
+</head>
+<body>
+
+<div class="container">
+	<h1>Ingresar Contribuyente</h1>
+	<form th:action="@{/insertar}" th:object="${contribuyente}" method="post">
+		
+		<div class="row">
+			<div class="col-25"><label>Importancia</label></div>
+			<div class="col-75">
+				<select th:field="*{importancia.idImportancia}">
+	            	<option 
+	            		th:each="imp : ${importancias}" 
+	            		th:value="${imp.idImportancia}" 
+	            		th:text="${imp.importancia}">
+	           		</option>
+	        	</select>
+	        	<span th:errors="*{importancia}"></span><br>
+        	</div>
+		</div>
+	
+		<div class="row">
+    		<div class="col-25"><label>Nombre</label></div>
+    		<div class="col-75">
+    			<input type="text" th:field="*{nombre}"><br>
+    			<span th:errors="*{nombre}"></span><br>
+    		</div>
+  		</div>
+  		
+  		<div class="row">
+    		<div class="col-25"><label>Apellido</label></div>
+    		<div class="col-75">
+    			<input type="text" th:field="*{apellido}"><br>
+    			<span th:errors="*{apellido}"></span><br>
+    		</div>
+  		</div>
+  		
+  		<div class="row">
+    		<div class="col-25"><label>NIT</label></div>
+    		<div class="col-75">
+    			<input type="text" th:field="*{nit}"><br>
+    			<span th:errors="*{nit}"></span><br>
+    		</div>
+  		</div>
+  		
+  		<div class="row">
+		    <input class="button" type="submit" value="Guardar">
+	    </div>
+	    
+	    <div class="row">
+		    <a class="button" href="/listado">Ver contribuyentes</a>
+	    </div>		
+	</form>
+</div>
+
+</body>
+</html>
